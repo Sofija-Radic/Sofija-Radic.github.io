@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Switch Example</title>
+</head>
+<body>
+
+<div id="content">
+    <h1 data-translate="greeting">Hello, World!</h1>
+    <p data-translate="description">This is a simple web application.</p>
+    <label for="languageDropdown">Select Language:</label>
+    <select id="languageDropdown" onchange="switchLanguage()">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="de">Deutsch</option>
+        <option value="fr">Français</option>
+        <option value="ru">Русский</option>
+    </select>
+</div>
+
+<script>
+    // Define language translations
+    const translations = {
+        en: {
+            greeting: 'Hello, World!',
+            description: 'This is a simple web application.'
+        },
+        es: {
+            greeting: '¡Hola, Mundo!',
+            description: 'Esta es una aplicación web simple.'
+        },
+        de: {
+            greeting: 'Hallo, Welt!',
+            description: 'Dies ist eine einfache Webanwendung.'
+        },
+        fr: {
+            greeting: 'Bonjour, le Monde!',
+            description: 'Ceci est une application web simple.'
+        },
+        ru: {
+            greeting: 'Привет, мир!',
+            description: 'Это простое веб-приложение.'
+        },
+        // Add more languages as needed
+    };
+
+    // Set the default language
+    let currentLanguage = 'en';
+
+    // Function to switch the language
+    function switchLanguage() {
+        currentLanguage = document.getElementById('languageDropdown').value;
+        updateContent();
+    }
+
+    // Function to update the content based on the current language
+    function updateContent() {
+        const elements = document.querySelectorAll('[data-translate]');
+        elements.forEach(element => {
+            const key = element.getAttribute('data-translate');
+            element.textContent = translations[currentLanguage][key];
+        });
+    }
+
+    // Initial content update
+    updateContent();
+</script>
+
+</body>
+</html>
